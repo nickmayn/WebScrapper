@@ -17,7 +17,7 @@ public class HTMLParser {
 		ArrayList<Item> Item = new ArrayList<Item>();
 		try {
 			document = Jsoup.connect("https://www.zillow.com/homes/for_sale/McLean-VA/46465_rid/3-_baths/globalrelevanceex_sort/39.049985,-77.074757,38.862567,-77.30959_rect/11_zm/0_mmm/").get();
-			Elements address1 = document.select("span[itemprop]:contains(McLean)");
+			Elements address1 = document.select("span[itemprop]:contains(McLean VA)");
 			Elements price1 = document.select(".zsg-photo-card-price:contains($)");
 			Elements bed1 = document.select(".zsg-photo-card-info:contains(bds)");
 			int i = 0;
@@ -27,12 +27,12 @@ public class HTMLParser {
 				i++;
 				}
 			for (int x = 2; x < 9; x++) {
-			document = Jsoup.connect("https://www.zillow.com/homes/for_sale/McLean-VA/46465_rid/3-_baths/globalrelevanceex_sort/39.049985,-77.074757,38.862567,-77.30959_rect/11_zm/"+ x +"_p/0_mmm/").get();
+			document = Jsoup.connect("https://www.zillow.com/homes/for_sale/McLean-VA/46465_rid/3-_baths/globalrelevanceex_sort/39.049985,-77.074757,38.862567,-77.30959_rect/11_zm/" + x +"_p/0_mmm/").get();
 			i = 0;
-			Elements address = document.select("span[itemprop]:contains(McLean)");
+			Elements address = document.select("span[itemprop]:contains(McLean VA)");
 			Elements price = document.select(".zsg-photo-card-price:contains($)");
 			Elements bed = document.select(".zsg-photo-card-info:contains(bds)");
-			while (i < price.size() - 2) {
+			while (i < address.size() - 1) {
 				Item item = new Item(address.get(i).text(), bed.get(i).text(), price.get(i).text());
 				Item.add(item);
 				i++;
@@ -42,19 +42,64 @@ public class HTMLParser {
 			{
 				Item temp = Item.get(y);
 				String holder = temp.getPrice().substring(1);
-				String holder2 = temp.getAddress();
-				String[] x = holder.split(",");
-				String d = "";
-				for (int x2 = 0; x2 < x.length; x2++)
+				String holder2 = temp.getBed();
+				String[] costHolder = holder.split(",");
+				String[] bbHolder = holder2.split("·");
+				String cost = "";
+				String bedString = "";
+				String bathString = "";
+				String sqftString = "";
+				for (int x = 0; x < costHolder.length; x++)
 				{
-					d = d + x[x2];
+					cost = cost + costHolder[x];
+					bedString = bbHolder[0];
+					bathString = bbHolder[1];
+					sqftString = bbHolder[2];
+					
 				}
-				Item.get(y).setPrice(d);
-				System.out.println(Item.get(y).getAddress());
+				Item.get(y).setPrice(cost);
+				Item.get(y).setBed(bedString);
+				Item.get(y).setBath(bathString);
+				Item.get(y).setSqft(sqftString);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		writeCSV.write("C:\\Users\\Nick\\Desktop\\Personal Projects\\Web Scrapper\\houseData.csv",Item);
 	}
+	
+	/**
+	 * 
+	 * @param x the string needing to be parsed
+	 * @return the number of beds only
+	 */
+	public String cleanBed(String x)
+	{
+		String answer = "";
+		answer = x.substring(x.length() - 4);
+		return answer;
+	}
+	/**
+	 * 
+	 * @param x
+	 * @return
+	 */
+	public String cleanBath(String x)
+	{
+		String answer = "";
+		answer = x.substring(x.length()-3);
+		return answer;
+	}
+	/**
+	 * 
+	 * @param x
+	 * @return
+	 */
+	public String cleanSqft(String x)
+	{
+		String answer = "";
+		answer = x.substring(x.length() - 5);
+		return answer;
+	}
+	
 }
