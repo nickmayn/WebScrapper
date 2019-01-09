@@ -1,4 +1,3 @@
-import java.awt.List;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
@@ -31,10 +30,33 @@ public class writeCSV {
 	 * 
 	 * @param Filename is the CSV file name being created.
 	 */
-	public static void write(String Filename) {
+	public static void write(String Filename, ArrayList<Item> Item) {
 		FileWriter fileWriter = null;
 		try {
 			fileWriter = new FileWriter(Filename);
+			fileWriter.append("Address");
+			fileWriter.append(",");
+			fileWriter.append("Price");
+			fileWriter.append(",");
+			fileWriter.append("Bedrooms");
+			fileWriter.append(",");
+			fileWriter.append("Baths");
+			fileWriter.append(",");
+			fileWriter.append("Square Footage");
+			fileWriter.append("\n");
+			for(int i = 0; i < Item.size(); i++)
+			{
+				fileWriter.append(Item.get(i).getAddress());
+				fileWriter.append(",");
+				fileWriter.append(Item.get(i).getPrice());
+				fileWriter.append(",");
+				fileWriter.append(Item.get(i).getBed());
+				fileWriter.append(",");
+				fileWriter.append(Item.get(i).getBath());
+				fileWriter.append(",");
+				fileWriter.append(Item.get(i).getSqft());
+				fileWriter.append("\n");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

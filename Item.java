@@ -7,13 +7,15 @@
  */
 public class Item {
 	private String address;
-	private String url;
+	private String bed;
 	private String price;
+	private String bath;
+	private String sqft;
 	
 	public Item(String a, String b, String c)
 	{
 		setAddress(a);
-		setURL(b);
+		setBed(b);
 		setPrice(c);
 	}
 	/**
@@ -29,9 +31,9 @@ public class Item {
 	 * method that returns the url of the searched item.
 	 * @return the URL of the item
 	 */
-	public String getURL()
+	public String getBed()
 	{
-		return url;
+		return bed;
 	}
 	/**
 	 * method that returns the price of the object.
@@ -42,12 +44,28 @@ public class Item {
 		return price;
 	}
 	/**
-	 * method that sets the URL of the item.
-	 * @param x is the String representing the URL.
+	 * method that returns the bath number of the searched item.
+	 * @return the bath number.
 	 */
-	public void setURL(String x)
+	public String getBath()
 	{
-		url = x;
+		return bath;
+	}
+	/**
+	 * method that returns the bath number of the searched item.
+	 * @return the bath number.
+	 */
+	public String getSqft()
+	{
+		return sqft;
+	}
+	/**
+	 * method that sets the beds of the item.
+	 * @param x is the String with the number of beds.
+	 */
+	public void setBed(String x)
+	{
+		bed = x;
 	}
 	/**
 	 * method that sets the title of the item.
@@ -64,5 +82,21 @@ public class Item {
 	public void setPrice(String x)
 	{
 		price = x;
+	}
+	/**
+	 * method that sets the price of the object.
+	 * @param x is the price of the object.
+	 */
+	public void setBath(String x)
+	{
+		bath = x;
+	}
+	/**
+	 * method that sets the sqft of the item.
+	 * @param x is the String with the number of beds.
+	 */
+	public void setSqft(String x)
+	{
+		sqft = x;
 	}
 }
