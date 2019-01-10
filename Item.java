@@ -99,4 +99,54 @@ public class Item {
 	{
 		sqft = x;
 	}
+	/**
+	 * 
+	 * @param x the string needing to be parsed
+	 * @return the number of beds only
+	 */
+	public String cleanBed(String x)
+	{
+		String answer = "";
+		for (int y = 0; y < x.length() - 4; y++)
+		{
+			answer = answer + x.charAt(y);
+		}
+		return answer;
+	}
+	/**
+	 * 
+	 * @param x the string needing to be parsed
+	 * @return the number of baths only
+	 */
+	public String cleanBath(String x)
+	{
+		String answer = "";
+		for (int y = 0; y < x.length() - 3; y++)
+		{
+			answer = answer + x.charAt(y);
+		}
+		return answer;
+	}
+	/**
+	 * 
+	 * @param x the string needing to be parsed
+	 * @return the number of sqft only
+	 */
+	public String cleanSqft(String x)
+	{
+		String answer = "";
+		int index = 0;
+		for (index = 0; index < x.length() - 5; index++)
+		{
+			answer = answer + x.charAt(index);
+		}
+		String [] holder = answer.split(",");
+		answer = "";
+		for (int y = 0; y < holder.length; y++)
+		{
+			answer = answer + holder[y];
+		}
+		return answer;
+	}
+
 }

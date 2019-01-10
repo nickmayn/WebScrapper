@@ -58,48 +58,13 @@ public class HTMLParser {
 					
 				}
 				Item.get(y).setPrice(cost);
-				Item.get(y).setBed(bedString);
-				Item.get(y).setBath(bathString);
-				Item.get(y).setSqft(sqftString);
+				Item.get(y).setBed(Item.get(y).cleanBed(bedString));
+				Item.get(y).setBath(Item.get(y).cleanBath(bathString));
+				Item.get(y).setSqft(Item.get(y).cleanSqft(sqftString));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		writeCSV.write("C:\\Users\\Nick\\Desktop\\Personal Projects\\Web Scrapper\\houseData.csv",Item);
-	}
-	
-	/**
-	 * 
-	 * @param x the string needing to be parsed
-	 * @return the number of beds only
-	 */
-	public String cleanBed(String x)
-	{
-		String answer = "";
-		answer = x.substring(x.length() - 4);
-		return answer;
-	}
-	/**
-	 * 
-	 * @param x
-	 * @return
-	 */
-	public String cleanBath(String x)
-	{
-		String answer = "";
-		answer = x.substring(x.length()-3);
-		return answer;
-	}
-	/**
-	 * 
-	 * @param x
-	 * @return
-	 */
-	public String cleanSqft(String x)
-	{
-		String answer = "";
-		answer = x.substring(x.length() - 5);
-		return answer;
-	}
-	
+	}	
 }
